@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gyf.immersionbar.ImmersionBar;
@@ -56,7 +57,15 @@ public class ShowActivity extends AppCompatActivity {
                     @Override
                     public void onNext(MyBean myBean) {
                         List<MyBean.ResultBean> result = myBean.getResult();
-                        toAdapter(result);
+                        if (result.size()>0){
+                            toAdapter(result);
+                        }else{
+                            show_recycler.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(ShowActivity.this,"请求的结果飞了",Toast.LENGTH_LONG).show();
+                        }
+
+
                     }
 
                     @Override
